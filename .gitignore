@@ -1,0 +1,16 @@
+# Build folders
+bin/
+obj/
+
+# VS
+.vs/
+*.user
+*.suo
+
+# SQLite
+*.db-shm
+*.db-wal
+
+# OS
+.DS_Store
+Thumbs.db
