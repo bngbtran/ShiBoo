@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>ShiBoo</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    width:360px;
+    height:240px;
+    position:relative;
+}
+
+.card{
+    width:100%;
+    height:100%;
+    background:white;
+    border-radius:18px;
+    position:absolute;
+    padding:28px;
+    box-sizing:border-box;
+
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+}
+
+.card.active{
+    display:flex;
+}
+
+h2,h3{
+    margin:0 0 10px;
+    color:#0f172a;
+}
+
+p{
+    margin:0;
+    font-size:14px;
+    color:#475569;
+    line-height:1.4;
+}
+
+.btn{
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    background:#1e3a8a;
+    color:white;
+    font-weight:600;
+    transition:0.2s;
+}
+
+.btn:hover{
+    background:#2563eb;
+    transform:translateY(-1px);
+}
+
+.download{
+    display:inline-block;
+    margin-top:16px;
+    padding:10px 14px;
+    background:#16a34a;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    transition:0.2s;
+}
+
+.download:hover{
+    background:#22c55e;
+    transform:translateY(-1px);
+}
+
+.nav{
+    position:absolute;
+    bottom:-55px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+}
+
+.nav button{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    background:white;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    font-size:18px;
+    font-weight:bold;
+    color:#0f172a;
+}
+
+.nav button:hover{
+    background:#f1f5f9;
+}
+
+.badge{
+    margin-top:12px;
+    font-size:12px;
+    color:#94a3b8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card active">
+        <h2>🐼 ShiBoo</h2>
+        <p>Hệ thống quản lý ca trực & nhân sự</p>
+        <div class="badge">WPF • .NET 8 • SQLite</div>
+    </div>
+
+    <div class="card">
+        <h3>👨‍💼 Admin Panel</h3>
+        <p>Quản lý nhân viên, phân quyền và thao tác nhanh</p>
+    </div>
+
+    <div class="card">
+        <h3>📅 Shift System</h3>
+        <p>Gán ca, đổi ca và duyệt yêu cầu linh hoạt</p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Offline Ready</h3>
+        <p>Hoạt động hoàn toàn offline với SQLite local</p>
+    </div>
+
+    <div class="card">
+        <h3>🚀 Ready to Use</h3>
+        <p>Tải về và chạy ngay trên Windows</p>
+
+        <a class="download"
+           href="https://github.com/bngbtran/ShiBoo/releases/download/v.1/ShiBoo.v.1.zip">
+           Download
+        </a>
+    </div>
+
+    <div class="nav">
+        <button onclick="prev()">‹</button>
+        <button onclick="next()">›</button>
+    </div>
+
+</div>
+
+<script>
+let index = 0;
+const cards = document.querySelectorAll(".card");
+
+function show(i){
+    cards.forEach(c => c.classList.remove("active"));
+    cards[i].classList.add("active");
+}
+
+function next(){
+    if(index < cards.length - 1){
+        index++;
+        show(index);
+    }
+}
+
+function prev(){
+    if(index > 0){
+        index--;
+        show(index);
+    }
+}
+</script>
+
+</body>
+</html>

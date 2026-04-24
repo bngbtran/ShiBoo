@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShiBoo.Models;
+using System;
+using System.IO;
 
 namespace ShiBoo.Data
 {
@@ -9,7 +11,10 @@ namespace ShiBoo.Data
         public DbSet<Shift> Shifts { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=ShiBoo.db");
+        {
+            var dbPath = Path.Combine(AppContext.BaseDirectory, "ShiBoo.db");
+            options.UseSqlite($"Data Source={dbPath}");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
