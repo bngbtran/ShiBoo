@@ -1,0 +1,83 @@
+<UserControl x:Class="ShiBoo.Views.Member.PersonalShift"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:ShiBoo.Helpers" 
+             Background="White">
+    
+    <UserControl.Resources>
+        <conv:ShiftDisableConverter x:Key="ShiftDisableConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="ĐĂNG KÝ CA TRỰC MỚI" FontWeight="Bold" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker x:Name="dpRequestDate" Width="150" Margin="0,0,10,0"/>
+                <ComboBox x:Name="cbRequestShift" Width="150" Margin="0,0,10,0">
+                    <ComboBoxItem Content="Ca 1" IsSelected="True"/>
+                    <ComboBoxItem Content="Ca 2"/>
+                    <ComboBoxItem Content="Ca 3"/>
+                </ComboBox>
+                <Button Content="Gửi yêu cầu" Click="BtnRequest_Click" Padding="10,5"/>
+            </StackPanel>
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Header="Lịch trực của tôi">
+            <DataGrid x:Name="dgMyShifts" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ngày" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy\}}" Width="120"/>
+                    <DataGridTextColumn Header="Ca hiện tại" Binding="{Binding ShiftName}" Width="100"/>
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
+                    
+                    <DataGridTemplateColumn Header="Yêu cầu đổi sang" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                   <ComboBox x:Name="cbNewShift" Width="100" Margin="2"
+          SelectedValuePath="Content"
+          Loaded="cbNewShift_Loaded"> <ComboBoxItem Content="Ca 1">
+        <ComboBoxItem.IsEnabled>
+            <MultiBinding Converter="{StaticResource ShiftDisableConverter}">
+                <Binding Source="Ca 1"/>
+                <Binding Path="ShiftName"/>
+            </MultiBinding>
+        </ComboBoxItem.IsEnabled>
+    </ComboBoxItem>
+
+    <ComboBoxItem Content="Ca 2">
+        <ComboBoxItem.IsEnabled>
+            <MultiBinding Converter="{StaticResource ShiftDisableConverter}">
+                <Binding Source="Ca 2"/>
+                <Binding Path="ShiftName"/>
+            </MultiBinding>
+        </ComboBoxItem.IsEnabled>
+    </ComboBoxItem>
+
+    <ComboBoxItem Content="Ca 3">
+        <ComboBoxItem.IsEnabled>
+            <MultiBinding Converter="{StaticResource ShiftDisableConverter}">
+                <Binding Source="Ca 3"/>
+                <Binding Path="ShiftName"/>
+            </MultiBinding>
+        </ComboBoxItem.IsEnabled>
+    </ComboBoxItem>
+</ComboBox>
+
+                                    <Button Content="Gửi đổi ca" 
+                                            Click="BtnEditRequest_Click" 
+                                            Background="Orange" Foreground="White" 
+                                            Padding="10,2" Margin="5,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>
