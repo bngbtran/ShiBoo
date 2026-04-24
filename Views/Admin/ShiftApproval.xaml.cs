@@ -20,13 +20,10 @@ namespace ShiBoo.Views.Admin
 {
     using var db = new ShiBooDbContext();
 
-    // 1. Cập nhật ComboBox gợi ý
     var memberList = db.Users.Where(u => u.Role == "Member").ToList();
     cbUserSuggest.ItemsSource = null; 
     cbUserSuggest.ItemsSource = memberList;
 
-    // 2. Lấy dữ liệu mới nhất từ Database
-    // Sử dụng .AsNoTracking() để đảm bảo lấy dữ liệu thực tế từ DB, không lấy từ cache của EF Core
     var allUsers = db.Users.ToList();
     var shifts = db.Shifts.ToList();
 
@@ -36,16 +33,12 @@ namespace ShiBoo.Views.Admin
         s.UserName = u != null ? u.Name : "Nhân viên đã bị xóa";
     }
 
-    // 3. Cập nhật DataGrid (Ép UI reset bằng cách gán null trước)
-    
-    // Đơn chờ duyệt
     dgPendingShifts.ItemsSource = null; 
     dgPendingShifts.ItemsSource = shifts
         .Where(x => x.Status == "Pending" || x.Status == "Change_Request")
-        .OrderByDescending(x => x.Date) // Sắp xếp ngày mới nhất lên đầu cho dễ duyệt
+        .OrderByDescending(x => x.Date) 
         .ToList();
 
-    // Tất cả ca trực
     dgAllShifts.ItemsSource = null;
     dgAllShifts.ItemsSource = shifts.OrderByDescending(x => x.Date).ToList();
 }
@@ -59,17 +52,15 @@ namespace ShiBoo.Views.Admin
         
         if (item != null)
         {
-            // Nếu là yêu cầu đổi ca
             if (item.Status == "Change_Request" && !string.IsNullOrEmpty(item.Note))
             {
-                // Chính thức đổi ca cũ thành ca mới
                 item.ShiftName = item.Note; 
-                item.Note = ""; // Xóa yêu cầu cũ
+                item.Note = ""; 
             }
             
-            item.Status = "Approved"; // Chuyển trạng thái thành đã duyệt
+            item.Status = "Approved";
             db.SaveChanges();
-            RefreshData(); // Load lại bảng
+            RefreshData(); 
             MessageBox.Show("Đã phê duyệt thay đổi ca!");
         }
     }
@@ -86,13 +77,13 @@ namespace ShiBoo.Views.Admin
         {
             if (item.Status == "Change_Request")
             {
-                item.Status = "Approved"; // Giữ lại ca trực cũ
-                item.Note = "";           // Xóa yêu cầu đổi ca đi
+                item.Status = "Approved"; 
+                item.Note = "";           
                 MessageBox.Show("Đã từ chối yêu cầu đổi. Ca cũ được giữ nguyên.");
             }
             else
             {
-                db.Shifts.Remove(item); // Nếu là đăng ký mới (Pending) thì xóa hẳn
+                db.Shifts.Remove(item);
                 MessageBox.Show("Đã xóa yêu cầu đăng ký mới.");
             }
             
@@ -152,7 +143,6 @@ namespace ShiBoo.Views.Admin
         var shift = e.Row.Item as ShiBoo.Models.Shift;
         if (shift != null)
         {
-            // Đợi UI cập nhật giá trị mới vào object shift xong mới lưu
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 using var db = new ShiBooDbContext();
@@ -160,20 +150,15 @@ namespace ShiBoo.Views.Admin
                 
                 if (item != null)
                 {
-                    // 1. Cập nhật tên ca mới
                     item.ShiftName = shift.ShiftName;
-
-                    // 2. (Tùy chọn) Nếu muốn đơn này hiện lại ở bảng chờ duyệt sau khi sửa:
-                    // item.Status = "Pending"; 
 
                     db.SaveChanges();
 
-                    // 3. QUAN TRỌNG: Gọi hàm này để cả 2 bảng cùng load lại dữ liệu mới nhất từ DB
                     RefreshData(); 
                 }
             }), System.Windows.Threading.DispatcherPriority.Background);
         }
     }
 }
-    } // Kết thúc class
-} // Kết thúc namespace (Cái này là cái bạn thiếu)
+    }
+} 

@@ -15,7 +15,6 @@ namespace ShiBoo.Data
         {
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             
-            // Seed data cho Admin mặc định nếu DB trống
             modelBuilder.Entity<User>().HasData(new User 
             { 
                 Id = 1, 

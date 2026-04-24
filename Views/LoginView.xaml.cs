@@ -15,7 +15,6 @@ namespace ShiBoo.Views
         {
             var vm = (LoginViewModel)DataContext;
 
-            // 🔥 lấy password từ UI
             vm.Password = txtPassword.Password;
 
             vm.Email = vm.Email?.Trim();

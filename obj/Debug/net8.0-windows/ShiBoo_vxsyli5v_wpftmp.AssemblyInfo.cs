@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShiBoo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e625d90d492067a1012075a07907568a67983abd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0804de7454a050535a6658cbe09ba460864e0b98")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShiBoo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShiBoo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

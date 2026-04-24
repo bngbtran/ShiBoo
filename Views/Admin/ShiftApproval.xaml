@@ -9,7 +9,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title -->
         <TextBlock Text="Quản lý ca trực &amp; duyệt đơn"
                    FontSize="24"
                    FontWeight="Bold"
@@ -22,7 +21,6 @@
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
 
-            <!-- LEFT CARD -->
             <Border Background="White"
                     CornerRadius="12"
                     Padding="15"
@@ -34,7 +32,6 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- FORM -->
                     <StackPanel Grid.Row="0">
 
                         <TextBlock Text="Gán ca trực"
@@ -49,7 +46,6 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- User -->
                             <StackPanel Margin="0,0,10,0">
                                 <TextBlock Text="Nhân viên"/>
                                 <ComboBox x:Name="cbUserSuggest"
@@ -60,7 +56,6 @@
                                           DisplayMemberPath="Name"/>
                             </StackPanel>
 
-                            <!-- Date -->
                             <StackPanel Grid.Column="1" Margin="0,0,10,0">
                                 <TextBlock Text="Ngày"/>
                                 <DatePicker x:Name="dpAssignDate"
@@ -68,7 +63,6 @@
                                             Background="#F1F5F9"/>
                             </StackPanel>
 
-                            <!-- Shift -->
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="Ca"/>
                                 <ComboBox x:Name="cbAssignShift"
@@ -98,7 +92,6 @@
 
                     </StackPanel>
 
-                    <!-- DATAGRID -->
                     <DataGrid Grid.Row="1"
                               x:Name="dgAllShifts"
                               AutoGenerateColumns="False"
@@ -108,7 +101,6 @@
                               HeadersVisibility="Column">
 
                         <DataGrid.Resources>
-                            <!-- Header style -->
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="#E2E8F0"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
@@ -139,7 +131,6 @@
                 </Grid>
             </Border>
 
-            <!-- RIGHT CARD -->
             <Border Grid.Column="1"
                     Background="White"
                     CornerRadius="12"

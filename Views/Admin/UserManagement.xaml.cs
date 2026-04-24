@@ -1,4 +1,3 @@
-// D:\ShiBoo\Views\Admin\UserManagement.xaml.cs
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,14 +14,12 @@ namespace ShiBoo.Views.Admin
             LoadData();
         }
 
-        // Hàm tải danh sách từ DB lên bảng
         private void LoadData()
         {
             using var db = new ShiBooDbContext();
             dgUsers.ItemsSource = db.Users.ToList();
         }
 
-        // Xử lý Thêm
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
@@ -33,7 +30,6 @@ namespace ShiBoo.Views.Admin
 
             using var db = new ShiBooDbContext();
             
-            // Kiểm tra email trùng
             if (db.Users.Any(u => u.Email == txtEmail.Text))
             {
                 MessageBox.Show("Email này đã tồn tại!");
@@ -45,21 +41,19 @@ namespace ShiBoo.Views.Admin
                 Name = txtName.Text,
                 Email = txtEmail.Text,
                 Role = (cbRole.SelectedItem as ComboBoxItem)?.Content.ToString() ?? "Member",
-                Password = "123@abc", // Mật khẩu mặc định
+                Password = "123@abc",
                 IsFirstLogin = true
             };
 
             db.Users.Add(newUser);
             db.SaveChanges();
             
-            // Reset form và load lại
             txtName.Clear();
             txtEmail.Clear();
             LoadData();
             MessageBox.Show("Thêm nhân viên thành công!");
         }
 
-        // Xử lý Xóa
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -86,7 +80,6 @@ namespace ShiBoo.Views.Admin
 
         private void BtnGoToShifts_Click(object sender, RoutedEventArgs e)
 {
-    // Gọi Instance của MainWindow để điều hướng sang trang ShiftApproval
     MainWindow.Instance?.NavigateTo(new ShiBoo.Views.Admin.ShiftApproval());
 }
     }

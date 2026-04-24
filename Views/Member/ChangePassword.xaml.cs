@@ -7,7 +7,6 @@ namespace ShiBoo.Views.Member
 {
     public partial class ChangePassword : UserControl
     {
-        // Giả sử ta truyền Email vào để biết đổi cho ai
         public string UserEmail { get; set; } = "";
 
         public ChangePassword()

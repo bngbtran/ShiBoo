@@ -1,4 +1,3 @@
-// D:\ShiBoo\Models\User.cs
 namespace ShiBoo.Models
 {
     public class User

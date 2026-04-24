@@ -14,7 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- HEADER + FORM -->
         <Border Background="White"
                 CornerRadius="12"
                 Padding="20"
@@ -57,7 +56,6 @@
             </StackPanel>
         </Border>
 
-        <!-- TABLE -->
         <Border Grid.Row="1"
                 Background="White"
                 CornerRadius="12"
@@ -95,7 +93,6 @@
                                             Binding="{Binding Status}"
                                             Width="120"/>
 
-                        <!-- REQUEST CHANGE -->
                         <DataGridTemplateColumn Header="Đổi ca"
                                                 Width="*">
                             <DataGridTemplateColumn.CellTemplate>

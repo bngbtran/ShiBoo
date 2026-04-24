@@ -10,7 +10,7 @@ namespace ShiBoo
             base.OnStartup(e);
             using (var db = new ShiBooDbContext())
             {
-                db.Database.EnsureCreated(); // Tự động tạo file .db nếu chưa có
+                db.Database.EnsureCreated();
             }
         }
     }

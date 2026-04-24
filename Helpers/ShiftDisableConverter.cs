@@ -10,10 +10,9 @@ namespace ShiBoo.Helpers
         {
             if (values.Length < 2 || values[0] == null || values[1] == null) return true;
 
-            string itemContent = values[0].ToString(); // Giá trị của ComboBoxItem
-            string currentShift = values[1].ToString(); // Giá trị ShiftName của dòng hiện tại
+            string itemContent = values[0].ToString(); 
+            string currentShift = values[1].ToString(); 
 
-            // Nếu trùng ca hiện tại thì return false (Disable)
             return itemContent != currentShift;
         }
 

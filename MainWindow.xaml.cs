@@ -11,7 +11,6 @@ namespace ShiBoo
     {
         public static MainWindow? Instance { get; private set; }
         
-        // Chuyển biến này vào bên trong Class
         private ShiBoo.Models.User? _currentUser;
 
         public MainWindow()
@@ -23,7 +22,7 @@ namespace ShiBoo
 
         public void ShowLogin()
         {
-            _currentUser = null; // Xóa user khi về login
+            _currentUser = null; 
             NavBar.Visibility = Visibility.Collapsed;
             MainContent.Content = new LoginView();
         }
@@ -56,8 +55,6 @@ namespace ShiBoo
         {
             MainContent.Content = view;
 
-            // TỰ ĐỘNG KIỂM TRA HIỂN THỊ NÚT BACK
-            // Chỉ hiện khi: User là Admin VÀ Trang hiện tại là ShiftApproval
             if (_currentUser?.Role == "Admin" && view is ShiftApproval)
             {
                 BtnBack.Visibility = Visibility.Visible;
@@ -78,7 +75,6 @@ namespace ShiBoo
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            // Quay lại trang quản lý nhân sự
             NavigateTo(new UserManagement());
         }
     }

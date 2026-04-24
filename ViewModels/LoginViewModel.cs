@@ -28,7 +28,6 @@ namespace ShiBoo.ViewModels
 
     if (user != null)
     {
-        // Gọi Instance của MainWindow để điều hướng
         MainWindow.Instance?.LoginSuccess(user);
     }
     else

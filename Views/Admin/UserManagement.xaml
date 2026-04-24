@@ -10,7 +10,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- HEADER -->
         <Grid Grid.Row="0" Margin="0,0,0,20">
             <TextBlock Text="Quản lý nhân viên"
                        FontSize="24"
@@ -32,7 +31,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                             CornerRadius="8"
-                            Padding="{TemplateBinding Padding}"> <!-- 🔥 FIX -->
+                            Padding="{TemplateBinding Padding}">
                         
                         <ContentPresenter HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
@@ -43,7 +42,6 @@
         </Button>
         </Grid>
 
-        <!-- FORM CARD -->
         <Border Grid.Row="1"
                 Background="White"
                 Padding="20"
@@ -64,7 +62,6 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Name -->
                     <StackPanel Margin="0,0,10,0">
                         <TextBlock Text="Họ tên"/>
                         <TextBox x:Name="txtName"
@@ -74,7 +71,6 @@
                                  Padding="8"/>
                     </StackPanel>
 
-                    <!-- Email -->
                     <StackPanel Grid.Column="1" Margin="0,0,10,0">
                         <TextBlock Text="Email"/>
                         <TextBox x:Name="txtEmail"
@@ -84,7 +80,6 @@
                                  Padding="8"/>
                     </StackPanel>
 
-                    <!-- Role -->
                     <StackPanel Grid.Column="2" Margin="0,0,10,0">
                         <TextBlock Text="Chức vụ"/>
                         <ComboBox x:Name="cbRole"
@@ -96,7 +91,6 @@
                         </ComboBox>
                     </StackPanel>
 
-                    <!-- Button -->
                     <Button Grid.Column="3"
                             Content="+ Thêm"
                             Click="BtnAdd_Click"
@@ -112,7 +106,6 @@
             </StackPanel>
         </Border>
 
-        <!-- TABLE CARD -->
         <Border Grid.Row="2"
                 Background="White"
                 CornerRadius="12"
