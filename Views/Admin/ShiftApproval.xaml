@@ -1,126 +1,200 @@
 <UserControl x:Class="ShiBoo.Views.Admin.ShiftApproval"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="White">
-    <Grid Margin="10">
+             Background="#0F172A">
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="QUẢN LÝ CA TRỰC &amp; DUYỆT ĐƠN" FontSize="20" FontWeight="Bold" Margin="10"/>
+        <!-- Title -->
+        <TextBlock Text="Quản lý ca trực &amp; duyệt đơn"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="5"/>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>   <ColumnDefinition Width="380"/> </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Gán ca trực mới" Grid.Column="0" Margin="5">
+            <!-- LEFT CARD -->
+            <Border Background="White"
+                    CornerRadius="12"
+                    Padding="15"
+                    Margin="5">
+
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Margin="10">
-                        <Grid>
+                    <!-- FORM -->
+                    <StackPanel Grid.Row="0">
+
+                        <TextBlock Text="Gán ca trực"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,10"/>
+
+                        <Grid Margin="0,5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            
+
+                            <!-- User -->
                             <StackPanel Margin="0,0,10,0">
-                                <TextBlock Text="Chọn Nhân viên:"/>
-                                <ComboBox x:Name="cbUserSuggest" Margin="0,5,0,10" IsEditable="True" 
-                                          IsTextSearchEnabled="True" DisplayMemberPath="Name" 
-                                          SelectedValuePath="Id" TextSearch.TextPath="Name"/>
+                                <TextBlock Text="Nhân viên"/>
+                                <ComboBox x:Name="cbUserSuggest"
+                                          Height="32"
+                                          Background="#F1F5F9"
+                                          BorderThickness="0"
+                                          IsEditable="True"
+                                          DisplayMemberPath="Name"/>
                             </StackPanel>
 
+                            <!-- Date -->
                             <StackPanel Grid.Column="1" Margin="0,0,10,0">
-                                <TextBlock Text="Chọn Ngày:"/>
-                                <DatePicker x:Name="dpAssignDate" Margin="0,5,0,10"/>
+                                <TextBlock Text="Ngày"/>
+                                <DatePicker x:Name="dpAssignDate"
+                                            Height="32"
+                                            Background="#F1F5F9"/>
                             </StackPanel>
 
+                            <!-- Shift -->
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Chọn Ca:"/>
-                                <ComboBox x:Name="cbAssignShift" Margin="0,5,0,10">
-                                    <ComboBoxItem Content="Ca 1" IsSelected="True"/>
+                                <TextBlock Text="Ca"/>
+                                <ComboBox x:Name="cbAssignShift"
+                                          Height="32"
+                                          Background="#F1F5F9"
+                                          BorderThickness="0">
+                                    <ComboBoxItem Content="Ca 1"/>
                                     <ComboBoxItem Content="Ca 2"/>
                                     <ComboBoxItem Content="Ca 3"/>
                                 </ComboBox>
                             </StackPanel>
                         </Grid>
 
-                        <Button Content="Thực hiện Gán Ca" Click="BtnAssign_Click" 
-                                Background="RoyalBlue" Foreground="White" Height="35" FontWeight="Bold"/>
-                        
-                        <Separator Margin="0,15"/>
-                        <TextBlock Text="Danh sách tất cả ca trực chính thức:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <Button Content="Gán ca"
+                                Click="BtnAssign_Click"
+                                Height="36"
+                                Margin="0,10,0,10"
+                                Background="#1E3A8A"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"/>
+
+                        <TextBlock Text="Danh sách ca trực"
+                                   FontWeight="Bold"
+                                   Margin="0,10,0,5"/>
+
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" x:Name="dgAllShifts" 
-          AutoGenerateColumns="False" 
-          CanUserAddRows="False"
-          CellEditEnding="dgAllShifts_CellEditEnding"
-          Margin="10,0,10,10">
+                    <!-- DATAGRID -->
+                    <DataGrid Grid.Row="1"
+                              x:Name="dgAllShifts"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Margin="0,5,0,0"
+                              RowHeight="35"
+                              HeadersVisibility="Column">
 
-    <DataGrid.Columns>
-        <DataGridTextColumn Header="Nhân viên" Binding="{Binding UserName}" Width="*"/>
-        <DataGridTextColumn Header="Ngày" Binding="{Binding Date, StringFormat=\{0:dd/MM\}}" Width="60"/>
-        
-        <DataGridTemplateColumn Header="Ca" Width="100">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding ShiftName}" VerticalAlignment="Center" Margin="5,0"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-            <DataGridTemplateColumn.CellEditingTemplate>
-                <DataTemplate>
-                    <ComboBox Text="{Binding ShiftName, UpdateSourceTrigger=PropertyChanged}" 
-                              IsDropDownOpen="True">
-                        <ComboBoxItem Content="Ca 1"/>
-                        <ComboBoxItem Content="Ca 2"/>
-                        <ComboBoxItem Content="Ca 3"/>
-                    </ComboBox>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellEditingTemplate>
-        </DataGridTemplateColumn>
+                        <DataGrid.Resources>
+                            <!-- Header style -->
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#E2E8F0"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGrid.Resources>
 
-        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
-        
-        <DataGridTemplateColumn Width="60">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Button Content="Xóa" Click="BtnDeleteShift_Click" Background="Gray" Foreground="White" FontSize="10"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-    </DataGrid.Columns>
-</DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nhân viên" Binding="{Binding UserName}" Width="*"/>
+                            <DataGridTextColumn Header="Ngày" Binding="{Binding Date, StringFormat=\{0:dd/MM\}}" Width="80"/>
+                            <DataGridTextColumn Header="Ca" Binding="{Binding ShiftName}" Width="80"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
+
+                            <DataGridTemplateColumn Width="70">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Xóa"
+                                                Click="BtnDeleteShift_Click"
+                                                Background="#64748B"
+                                                Foreground="White"
+                                                FontSize="11"
+                                                Padding="5,2"
+                                                BorderThickness="0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
-            </GroupBox>
+            </Border>
 
-            <GroupBox Header="Đơn chờ duyệt &amp; Sửa" Grid.Column="1" Margin="5">
-                <DataGrid x:Name="dgPendingShifts" AutoGenerateColumns="False" CanUserAddRows="False">
-    <DataGrid.Columns>
-        <DataGridTextColumn Header="NV" Binding="{Binding UserName}" Width="*"/>
-        <DataGridTextColumn Header="Ngày" Binding="{Binding Date, StringFormat=\{0:dd/MM\}}" Width="55"/>
-        
-        <DataGridTextColumn Header="Ca cũ" Binding="{Binding ShiftName}" Width="60"/>
-        
-        <DataGridTextColumn Header="Ca muốn đổi" Binding="{Binding Note}" FontWeight="Bold" Foreground="Red" Width="80"/>
+            <!-- RIGHT CARD -->
+            <Border Grid.Column="1"
+                    Background="White"
+                    CornerRadius="12"
+                    Padding="15"
+                    Margin="5">
 
-        <DataGridTemplateColumn Header="Lệnh" Width="110">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Duyệt" Click="BtnApprove_Click" Background="Green" Foreground="White" Margin="2"/>
-                        <Button Content="Từ chối" Click="BtnReject_Click" Background="Red" Foreground="White" Margin="2"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-    </DataGrid.Columns>
-</DataGrid>
-            </GroupBox>
+                <StackPanel>
+                    <TextBlock Text="Đơn chờ duyệt"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Margin="0,0,0,10"/>
+
+                    <DataGrid x:Name="dgPendingShifts"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              RowHeight="35">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nhân viên" Binding="{Binding UserName}" Width="70"/>
+                            <DataGridTextColumn Header="Ngày" Binding="{Binding Date, StringFormat=\{0:dd/MM\}}" Width="70"/>
+                            <DataGridTextColumn Header="Ca cũ" Binding="{Binding ShiftName}" Width="70"/>
+
+                            <DataGridTextColumn Header="Ca đổi"
+                                                Binding="{Binding Note}"
+                                                Width="80"
+                                                Foreground="Red"
+                                                FontWeight="Bold"/>
+
+                            <DataGridTemplateColumn Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="✔"
+                                                    Click="BtnApprove_Click"
+                                                    Background="#16A34A"
+                                                    Foreground="White"
+                                                    Margin="2"
+                                                    Width="40"/>
+
+                                            <Button Content="✖"
+                                                    Click="BtnReject_Click"
+                                                    Background="#DC2626"
+                                                    Foreground="White"
+                                                    Margin="2"
+                                                    Width="40"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+
         </Grid>
     </Grid>
 </UserControl>

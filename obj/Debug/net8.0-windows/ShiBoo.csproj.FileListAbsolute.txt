@@ -69,3 +69,4 @@ D:\ShiBoo\obj\Debug\net8.0-windows\refint\ShiBoo.dll
 D:\ShiBoo\obj\Debug\net8.0-windows\ShiBoo.pdb
 D:\ShiBoo\obj\Debug\net8.0-windows\ShiBoo.genruntimeconfig.cache
 D:\ShiBoo\obj\Debug\net8.0-windows\ref\ShiBoo.dll
+D:\ShiBoo\obj\Debug\net8.0-windows\ShiBoo.sourcelink.json
